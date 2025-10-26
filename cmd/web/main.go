@@ -7,6 +7,11 @@ import (
 
 func main() {
 	mux := http.NewServeMux()
+	//This file server allows us to serve files out of the ui/static directory.
+	fileServer := http.FileServer(http.Dir("./ui/static/"))
+	mux.Handle("GET /static/", http.StripPrefix("/static", fileServer))
+
+	//Other appliation routes
 	mux.HandleFunc("GET /{$}", home)
 	mux.HandleFunc("GET /snippet/view/{id}", snippetView)
 	mux.HandleFunc("GET /snippet/create", snippetCreate)
