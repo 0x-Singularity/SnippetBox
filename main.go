@@ -35,6 +35,8 @@ func snippetCreatePost(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Save a new snippet.."))
 }
 
+//test
+
 func main() {
 	mux := http.NewServeMux()
 	//routes
