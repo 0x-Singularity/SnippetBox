@@ -6,19 +6,21 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
-
+	//import the models package we created for the DB
 	_ "github.com/go-sql-driver/mysql"
+	"snippetbox.0xsingularity.com/internal/models"
 )
 
 // Define an application struct to hold the application wide dependencies (like the structured logger)
 type application struct {
-	logger *slog.Logger
+	logger   *slog.Logger
+	snippets *models.SnippetModel
 }
 
 func main() {
 	//Define a new command line flag, defaults to 4000 if not specified
 	addr := flag.String("addr", ":4000", "HTTP network address")
-	dsn := flag.String("dsn", "web:pass@/snippetbox?parseTime=true", "MySQL data source name")
+	dsn := flag.String("dsn", "web:545498@/snippetbox?parseTime=true", "MariaDB data source name")
 	flag.Parse()
 
 	// Introducing structured logging, writes to stdout and nil as second parameter keeps default settings
@@ -32,9 +34,11 @@ func main() {
 
 	defer db.Close()
 
-	//Initialize new instance of the application struct that contains the logger
+	//Initialize new instance of the application struct that contains the logger and snippets. This lets
+	//us do dependency injection
 	app := &application{
-		logger: logger,
+		logger:   logger,
+		snippets: &models.SnippetModel{DB: db},
 	}
 
 	mux := http.NewServeMux()
