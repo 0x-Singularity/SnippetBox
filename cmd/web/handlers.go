@@ -66,6 +66,7 @@ func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request
 	// ID of the new record back.
 	id, err := app.snippets.Insert(title, content, expires)
 	if err != nil {
+		app.serverError(w, r, err)
 		return
 	}
 	// Redirect the user to the relevant page for the snippet.
