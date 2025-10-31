@@ -35,7 +35,7 @@ func main() {
 	defer db.Close()
 
 	//Initialize new instance of the application struct that contains the logger and snippets. This lets
-	//us do dependency injection
+	//us do dependency injection by creating a dependency container (struct)
 	app := &application{
 		logger:   logger,
 		snippets: &models.SnippetModel{DB: db},
