@@ -36,7 +36,6 @@ func main() {
 	}
 	defer db.Close()
 
-	// Initialize an application struct instance containing the logger and SnippetModel
 	app := &application{
 		logger:   logger,
 		snippets: &models.SnippetModel{DB: db},
@@ -67,4 +66,3 @@ func openDB(dsn string) (*sql.DB, error) {
 
 	return db, nil
 }
-
