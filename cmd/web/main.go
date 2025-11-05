@@ -11,6 +11,7 @@ import (
 	"snippetbox.0xsingularity.com/internal/models"
 )
 
+// Another comment for git test
 // Define an application struct to hold the application-wide dependencies
 type application struct {
 	logger   *slog.Logger
