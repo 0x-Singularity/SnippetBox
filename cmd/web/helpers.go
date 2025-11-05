@@ -4,6 +4,8 @@ import (
 	"net/http"
 )
 
+// comment to test git
+
 func (app *application) serverError(w http.ResponseWriter, r *http.Request, err error) {
 	var (
 		method = r.Method
