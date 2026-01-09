@@ -64,5 +64,5 @@ This keeps presentation concerns separate from application logic.
 Below is a screenshot of the SnippetBox homepage:
 
 ```md
-![SnippetBox Homepage](./ui/static/img/SnippetBoxView.png)
+![SnippetBox Homepage](ui/static/img/SnippetBoxView.png)
 
