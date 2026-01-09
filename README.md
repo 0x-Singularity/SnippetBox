@@ -1,112 +1,68 @@
-SnippetBox
+# SnippetBox
 
-SnippetBox is a full-stack web application written in Go that allows users to create, view, and manage text snippets — similar in concept to Pastebin.
-This project is based on the Lets Go book and serves as a practical demonstration of building a production-ready web application using idiomatic Go.
+SnippetBox is a **full-stack web application written in Go** that allows users to create, view, and manage text snippets — similar in concept to Pastebin.
 
-The application follows Go best practices for project structure, dependency management, security, and web development.
+This project is based on the *Lets Go* book and serves as a practical demonstration of building a production-ready web application using idiomatic Go. It emphasizes clean architecture, maintainability, and best practices commonly used in real-world Go applications.
 
-Features
+---
 
-Create and view text snippets
+## Features
 
-Automatically expire snippets after a set period
+- Create and view text snippets
+- Automatically expire snippets after a configurable period
+- Server-side rendered HTML using Go templates
+- Secure handling of user input and errors
+- Structured logging
+- Clear separation of concerns across application layers
 
-Server-side rendered HTML using Go templates
+---
 
-Secure user input handling
+## Project Structure
 
-Structured logging and error handling
+The project follows standard Go project layout conventions:
 
-Clean separation of concerns across application layers
+### `cmd/`
 
-Project Structure
+Contains the **application-specific entry point(s)**.
 
-The project is organized according to commonly accepted Go conventions:
+- `cmd/web` holds the web server startup logic, routing, middleware, and configuration.
+- This structure makes it easy to add additional executables in the future (e.g., APIs, background workers).
 
-.
-├── cmd/
-│   └── web/
-│       └── main.go
-├── internal/
-│   ├── models/
-│   ├── validator/
-│   └── ...
-├── ui/
-│   ├── html/
-│   └── static/
-└── go.mod
+### `internal/`
 
-cmd/
+Contains **core business logic and shared application code** that should not be imported by external projects.
 
-Contains the application-specific entry point for the executable programs.
+- `models` — database models and data access logic
+- `validator` — form validation helpers
+- Additional utilities and helpers used across the application
 
-cmd/web holds the web server configuration, routing, middleware, and startup logic.
+Using the `internal` directory enforces encapsulation at the compiler level.
 
-This separation allows additional executables (e.g., background workers or APIs) to be added cleanly in the future.
+### `ui/`
 
-internal/
+Contains all **user interface assets** for the web application.
 
-Houses non-application-specific business logic that should not be imported by external projects.
+- `ui/html` — Go HTML templates used for server-side rendering
+- `ui/static` — static assets such as CSS and images
 
-models — database models and data access logic
+This keeps presentation concerns separate from application logic.
 
-validator — form validation helpers
+---
 
-Shared utilities and helpers used across the application
+## Technologies Used
 
-Using the internal directory enforces encapsulation at the compiler level.
+- **Go**
+- **net/http**
+- **html/template**
+- **Go Modules**
+- **MySQL** (or SQLite, if applicable)
 
-ui/
+---
 
-Contains all user interface assets for the web application.
-
-ui/html — Go HTML templates
-
-ui/static — static assets such as CSS and images
-
-This separation keeps presentation concerns isolated from application logic.
-
-Technologies Used
-
-Go — backend language
-
-net/http — HTTP server and routing
-
-html/template — server-side HTML rendering
-
-MySQL (or SQLite, if applicable) — data persistence
-
-Go Modules — dependency management
-
-Screenshots
+## Screenshots
 
 Below is a screenshot of the SnippetBox homepage:
 
+```md
 ![SnippetBox Homepage](./ui/static/img/screenshot.png)
 
-
-(Replace the path above with the actual path to your image.)
-
-Including screenshots helps reviewers quickly understand the UI and overall functionality without running the app locally.
-
-What This Project Demonstrates
-
-Writing idiomatic, maintainable Go
-
-Structuring a real-world Go web application
-
-Secure handling of user input and errors
-
-Separation of concerns between routing, business logic, and presentation
-
-Readiness for extension and production hardening
-
-Future Improvements
-
-User authentication and authorization
-
-Snippet search functionality
-
-Pagination and filtering
-
-Deployment configuration (Docker / cloud hosting)
